@@ -42,10 +42,15 @@ client.connect(err => {
   console.log('db connected successfully')
 
   app.get('/',(req,res)=>{
-    admin.auth().verifyIdToken(req.headers.authorization)
-    .then(result=>{
-        res.send(result)
-    })
+    if(req.headers.authorization){
+      admin.auth().verifyIdToken(req.headers.authorization)
+      .then(result=>{
+          res.send(result)
+      })
+    }else{
+      res.send('Hello World!')
+    }
+    
 })
 
   app.post('/addAService',(req, res) =>{
