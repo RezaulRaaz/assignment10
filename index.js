@@ -212,10 +212,10 @@ client.connect(err => {
       })
   })
 
-  app.get('/admin', (req, res)=>{
-    adminCollection.find({})
+  app.post('/admin', (req, res)=>{
+    adminCollection.find({email:req.body.email})
     .toArray((err,documents)=>{
-      res.send(documents)
+      res.send(documents.length > 0)
     })
   })
 
